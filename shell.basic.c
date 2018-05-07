@@ -4,12 +4,32 @@
 #include <string.h>
 #include <fcntl.h>
 #include <sys/wait.h>
+#include <ctype.h>
 // author :  Santiago Rodriguez : rodriguez.santiago@correounivalles.edu.co
 // date : May 5, 2018.
+char* discrimand(char command_args[80]){
+	char * myargs[];
+	for(int i=0;iscntrl(command_args[i]);i++){
+		if (isblank(command_args[i])){
+			for(int j=i+1;isblank(command_args[j]);j++){
+			}
+		}else if (i==0){
+			
+			for(int j=i;isblank(command_args[j]);j++){
+
+			}
+		}
+
+		
+	}
+}
+
 int main(int argc, char *argv[]){
 	while(1){
 		char command[80];
+		printf("~$");
 		scanf("%s", command);
+		printf("\n %s",command);
 		if( ! strcmp(command, "exit")){
 			break;
 		}else{
