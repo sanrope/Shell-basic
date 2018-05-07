@@ -6,30 +6,29 @@
 #include <sys/wait.h>
 #include <ctype.h>
 // author :  Santiago Rodriguez : rodriguez.santiago@correounivalles.edu.co
-// date : May 5, 2018.
-char* discrimand(char command_args[80]){
-	char * myargs[];
-	for(int i=0;iscntrl(command_args[i]);i++){
-		if (isblank(command_args[i])){
-			for(int j=i+1;isblank(command_args[j]);j++){
-			}
-		}else if (i==0){
-			
-			for(int j=i;isblank(command_args[j]);j++){
+// date last mod: May 7, 2018.
 
-			}
-		}
-
-		
+void discrimand(char command_args[80], char** reference){
+	char *aux;
+	int i=0;
+	aux = strtok(command_args, " ");
+	while(aux != NULL){
+		reference[i]=strdup(aux);
+		reference[i+1]= NULL;
+		aux = strtok(NULL, " ");
+		i++;
 	}
 }
+	
+
+
 
 int main(int argc, char *argv[]){
 	while(1){
 		char command[80];
 		printf("~$");
-		scanf("%s", command);
-		printf("\n %s",command);
+		scanf(" %[^\n]s", command);
+		//printf("%s \n",command);
 		if( ! strcmp(command, "exit")){
 			break;
 		}else{
@@ -42,10 +41,11 @@ int main(int argc, char *argv[]){
 				//close(STDOUT_FILENO);
 				//open("./p4.output", O_CREAT|O_WRONLY|O_TRUNC, S_IRWXU);
 			   // now exec command...
-				char *myargs[2];
-				myargs[0] = strdup(command);   // program: command with out arguments
+				char *myargs[40];
+				discrimand(command, myargs);
+				//myargs[0] = strdup(command);   // program: command with out arguments
 				//myargs[1] = strdup("p4.c"); // argument: file to count // not yet.
-				myargs[1] = NULL;           // marks end of array
+				//myargs[1] = NULL;           // marks end of array
 				execvp(myargs[0], myargs);  // runs command
 			} else {// parent goes down this path (main)
 				int wc = wait(NULL);
@@ -54,3 +54,4 @@ int main(int argc, char *argv[]){
 	}
 	return 0;
 }
+
