@@ -26,11 +26,11 @@
 				} else if (rc == 0) { // child: redirect standard output to a file // not yet.
 					char *myargs[40];
 					discrimand(command, myargs);
-					outToFile(myargs);
 					if(existPipe(myargs)){
 						piper(myargs);
 						break;
 					}else{
+						outToFile(myargs);
 						execvp(myargs[0], myargs);  // runs command
 						break;
 					}
