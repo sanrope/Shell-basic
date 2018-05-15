@@ -85,6 +85,7 @@ void piper(char ** arguments){// comprobaded.
 	      				close(0);
 	      				dup(fd[0]);// STDOUT = extremo de salida del pipe *
 	      				close(fd[0]);// cerramos el descriptor de fichero que sobra tras el dup(fd[0])*
+					outToFile(argumento2);
 	      				execvp(argumento2[0],argumento2);// llamado a sistema
 
 	      			}
